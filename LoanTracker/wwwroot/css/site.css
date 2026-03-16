@@ -1,22 +1,219 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+/* ======================================================
+   GLOBAL SETTINGS
+====================================================== */
 
 html {
-  position: relative;
-  min-height: 100%;
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width:768px) {
+    html {
+        font-size: 16px;
+    }
 }
 
 body {
-  margin-bottom: 60px;
+    background: #f4f6f9;
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Focus Effects */
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+
+/* ======================================================
+   LAYOUT
+====================================================== */
+
+/* Top Navbar */
+
+.topbar {
+    background: linear-gradient(90deg,#4f46e5,#6366f1);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.brand-logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+
+/* Sidebar */
+
+.sidebar {
+    height: 100vh;
+    background: #111827;
+    color: white;
+    position: sticky;
+    top: 0;
+}
+
+    /* Sidebar Menu */
+
+    .sidebar a {
+        color: #d1d5db;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        /* Sidebar Hover Animation */
+
+        .sidebar a:hover {
+            background: #4f46e5;
+            color: white;
+            transform: translateX(6px);
+        }
+
+        /* Active Menu */
+
+        .sidebar a.active {
+            background: #4f46e5;
+            color: white;
+        }
+
+    /* Sidebar Icons */
+
+    .sidebar i {
+        font-size: 18px;
+    }
+
+/* Content Area */
+
+.content-area {
+    padding: 25px;
+}
+
+
+/* ======================================================
+   CARDS
+====================================================== */
+
+.card {
+    transition: 0.3s ease;
+}
+
+    .card:hover {
+        transform: translateY(-4px);
+    }
+
+
+/* ======================================================
+   DASHBOARD
+====================================================== */
+
+.dashboard-header h2 {
+    font-weight: 700;
+}
+
+/* Dashboard Cards */
+
+.dashboard-card {
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    border-radius: 15px;
+    color: white;
+    transition: 0.3s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+    .dashboard-card:hover {
+        transform: translateY(-6px);
+    }
+
+/* Dashboard Icon */
+
+.card-icon {
+    font-size: 40px;
+    margin-right: 20px;
+}
+
+/* Dashboard Content */
+
+.card-content h2 {
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.card-content h6 {
+    opacity: 0.8;
+}
+
+.small-text {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* Dashboard Colors */
+
+.borrowers {
+    background: linear-gradient(135deg,#4f46e5,#6366f1);
+}
+
+.loans {
+    background: linear-gradient(135deg,#10b981,#34d399);
+}
+
+.pending {
+    background: linear-gradient(135deg,#ef4444,#f87171);
+}
+
+
+/* ======================================================
+   TABLES
+====================================================== */
+
+.table {
+    background: white;
+    border-radius: 8px;
+}
+
+
+/* ======================================================
+   BUTTONS
+====================================================== */
+
+.btn {
+    border-radius: 6px;
+}
+
+
+/* ======================================================
+   MODALS
+====================================================== */
+
+.modal-content {
+    border-radius: 12px;
+}
+
+
+/* ======================================================
+   BORROWERS / AVATAR
+====================================================== */
+
+.avatar-circle {
+    width: 38px;
+    height: 38px;
+    background: #e0e7ff;
+    color: #4f46e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
 }

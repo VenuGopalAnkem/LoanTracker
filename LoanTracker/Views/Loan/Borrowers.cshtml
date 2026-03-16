@@ -4,43 +4,140 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Borrowers</h2>
+<div class="container-fluid">
 
-<a href="/Loan/CreateBorrower" class="btn btn-primary mb-3">
-    Add Borrower
-</a>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<table class="table table-bordered">
+        <div>
+            <h3 class="fw-bold">Borrowers</h3>
+            <span class="text-muted">Manage all registered borrowers</span>
+        </div>
 
-    <thead>
+        <a href="/Loan/CreateBorrower" class="btn btn-primary shadow-sm">
+            <i class="bi bi-person-plus"></i> Add Borrower
+        </a>
 
-        <tr>
+    </div>
 
-            <th>Name</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Guardian</th>
+    <!-- Summary Card -->
 
-        </tr>
+    <div class="row mb-4">
 
-    </thead>
+        <div class="col-md-3">
 
-    <tbody>
+            <div class="card dashboard-card p-3 text-center">
 
-        @foreach (System.Data.DataRow r in Model.Rows)
-        {
+                <h6 class="text-muted">Total Borrowers</h6>
 
-            <tr>
+                <h2 class="fw-bold text-primary">
+                    @Model.Rows.Count
+                </h2>
 
-                <td>@r["FullName"]</td>
-                <td>@r["MobileNumber"]</td>
-                <td>@r["Email"]</td>
-                <td>@r["GuardianName"]</td>
+            </div>
 
-            </tr>
+        </div>
 
-        }
+    </div>
 
-    </tbody>
+    <!-- Search -->
 
-</table>
+    <div class="card shadow-sm border-0 rounded-4">
+
+        <div class="card-body">
+
+            <div class="row mb-3">
+
+                <div class="col-md-4">
+
+                    <input type="text"
+                           id="searchBorrower"
+                           class="form-control"
+                           placeholder="Search borrower...">
+
+                </div>
+
+            </div>
+
+            <!-- Table -->
+
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle">
+
+                    <thead class="table-light">
+
+                        <tr>
+
+                            <th>Borrower</th>
+                            <th>Mobile</th>
+                            <th>Email</th>
+                            <th>Guardian</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="borrowerTable">
+
+                        @foreach (System.Data.DataRow r in Model.Rows)
+                        {
+
+                            <tr>
+
+                                <td>
+
+                                    <div class="d-flex align-items-center">
+
+                                        <div class="avatar-circle me-3">
+                                            <i class="bi bi-person-fill"></i>
+                                        </div>
+
+                                        <span class="fw-semibold">
+                                            @r["FullName"]
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                                <td>@r["MobileNumber"]</td>
+
+                                <td>@r["Email"]</td>
+
+                                <td>@r["GuardianName"]</td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    document.getElementById("searchBorrower").addEventListener("keyup", function () {
+
+        let value = this.value.toLowerCase();
+
+        let rows = document.querySelectorAll("#borrowerTable tr");
+
+        rows.forEach(function (row) {
+
+            let text = row.innerText.toLowerCase();
+
+            row.style.display = text.includes(value) ? "" : "none";
+
+        });
+
+    });
+
+</script>
