@@ -1,0 +1,81 @@
+﻿@model LoanTracker.Models.DashboardModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Loan Tracker Dashboard</h2>
+        <p class="text-muted">Overview of your loan system</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Borrowers -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 rounded-4 text-center p-3">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <span class="badge bg-primary p-3 rounded-circle">
+                            <i class="bi bi-people-fill fs-3"></i>
+                        </span>
+                    </div>
+
+                    <h5 class="text-muted">Total Borrowers</h5>
+
+                    <h1 class="fw-bold text-primary">
+                        @Model.TotalBorrowers
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Loans -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 rounded-4 text-center p-3">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <span class="badge bg-success p-3 rounded-circle">
+                            <i class="bi bi-cash-stack fs-3"></i>
+                        </span>
+                    </div>
+
+                    <h5 class="text-muted">Total Loans</h5>
+
+                    <h1 class="fw-bold text-success">
+                        @Model.TotalLoans
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending -->
+        <div class="col-md-4">
+            <div class="card shadow border-0 rounded-4 text-center p-3">
+                <div class="card-body">
+
+                    <div class="mb-3">
+                        <span class="badge bg-danger p-3 rounded-circle">
+                            <i class="bi bi-exclamation-triangle-fill fs-3"></i>
+                        </span>
+                    </div>
+
+                    <h5 class="text-muted">Pending Balance</h5>
+
+                    <h1 class="fw-bold text-danger">
+                        ₹ @Model.PendingBalance
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
