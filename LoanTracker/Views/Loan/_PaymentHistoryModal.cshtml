@@ -1,0 +1,23 @@
+﻿@model System.Data.DataTable
+
+<table class="table table-bordered">
+
+    <tr>
+        <th>Date</th>
+        <th>Amount</th>
+    </tr>
+
+    @foreach (System.Data.DataRow r in Model.Rows)
+    {
+
+        <tr>
+
+            <td>@Convert.ToDateTime(r["PaymentDate"]).ToString("dd-MM-yyyy")</td>
+
+            <td>@r["AmountPaid"]</td>
+
+        </tr>
+
+    }
+
+</table>

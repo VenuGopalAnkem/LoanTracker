@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="itext7" Version="9.5.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="ReportViewerCore.NETCore" Version="15.1.33" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reports\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="cdoe_odlDataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>cdoe_odlDataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="cdoe_odlDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>cdoe_odlDataSet.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
+</Project>

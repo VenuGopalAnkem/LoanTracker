@@ -1,0 +1,57 @@
+﻿@model System.Data.DataRow
+
+<div class="p-4">
+
+    <h4 class="text-center mb-4">Payment Receipt</h4>
+
+    <table class="table table-bordered">
+
+        <tr>
+            <th>Receipt No</th>
+            <td>@Model["ReceiptNumber"]</td>
+        </tr>
+
+        <tr>
+            <th>Borrower</th>
+            <td>@Model["FullName"]</td>
+        </tr>
+
+        <tr>
+            <th>Loan Amount</th>
+            <td>₹ @Model["LoanAmount"]</td>
+        </tr>
+
+        <tr>
+            <th>Daily Pay</th>
+            <td>₹ @Model["DailyPay"]</td>
+        </tr>
+
+        <tr>
+            <th>Amount Paid</th>
+            <td>₹ @Model["AmountPaid"]</td>
+        </tr>
+
+        <tr>
+            <th>Total Paid</th>
+            <td>₹ @Model["TotalPaid"]</td>
+        </tr>
+
+        <tr>
+            <th>Balance</th>
+            <td>₹ @Model["Balance"]</td>
+        </tr>
+
+        <tr>
+            <th>Payment Date</th>
+            <td>@Model["PaymentDate"]</td>
+        </tr>
+
+    </table>
+
+    <div class="text-center">
+        <button onclick="window.print()" class="btn btn-success">
+            Print Receipt
+        </button>
+    </div>
+
+</div>
