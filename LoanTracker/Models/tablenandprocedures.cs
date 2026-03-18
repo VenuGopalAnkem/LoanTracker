@@ -9,12 +9,15 @@ using System.Security.Cryptography.Xml;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System;
+using iText.Commons.Utils;
+using iText.StyledXmlParser.Jsoup;
+using System.Diagnostics.Metrics;
+using System.Drawing;
 
 namespace LoanTracker.Models
 {
     public class tablenandprocedures
     {
-
 
 //        CREATE TABLE Borrowers
 //(
@@ -46,7 +49,7 @@ namespace LoanTracker.Models
 //--------------------------------------------------
 //CREATE TABLE Loans
 //(
-//        Id INT IDENTITY(1,1) PRIMARY KEY,
+//    Id INT IDENTITY(1,1) PRIMARY KEY,
 
 //    BorrowerId INT,
 
@@ -74,7 +77,7 @@ namespace LoanTracker.Models
 
 //-------------------------------------------------
 //CREATE TABLE Payments
-//        (
+//(
 //    Id INT IDENTITY(1,1) PRIMARY KEY,
 
 //    LoanId INT,
@@ -101,7 +104,7 @@ namespace LoanTracker.Models
 //)
 //--------------------------------------------------
 //CREATE PROCEDURE sp_AddBorrower
-//        (
+//(
 //@FullName NVARCHAR(150),
 //@DOB DATE,
 //@MobileNumber NVARCHAR(20),
@@ -123,7 +126,7 @@ namespace LoanTracker.Models
 //MobileNumber,
 //Email,
 //LocalAddress,
-//        PermanentAddress,
+//PermanentAddress,
 //MaritalStatus,
 //GuardianName,
 //AadharNumber,
@@ -147,12 +150,12 @@ namespace LoanTracker.Models
 //END
 //-----------------------------------------------------
 //CREATE PROCEDURE sp_GetBorrowers
-//        AS
+//AS
 //BEGIN
 
 //SELECT*
-//        FROM Borrowers
-//        ORDER BY Id DESC
+//FROM Borrowers
+//ORDER BY Id DESC
 
 //END
 //---------------------------------------------------
@@ -197,7 +200,7 @@ namespace LoanTracker.Models
 //@LoanAmount,
 //@CommissionPercent,
 //@CommissionAmount,
-//@FinalLoan,
+//        @FinalLoan,
 //@LoanPeriod,
 //@DailyPay,
 //@LoanPurpose
@@ -205,7 +208,7 @@ namespace LoanTracker.Models
 
 //END
 //-------------------------------------------------
-//CREATE PROCEDURE sp_GetLoans
+//Alter PROCEDURE sp_GetLoans
 //AS
 //BEGIN
 
@@ -228,6 +231,8 @@ namespace LoanTracker.Models
 //LEFT JOIN Payments P
 //ON P.LoanId = L.Id
 
+//where L.Status='Active'
+
 //GROUP BY
 //L.Id,
 //B.FullName,
@@ -236,9 +241,20 @@ namespace LoanTracker.Models
 //L.Status
 
 //END
+
+
+//--select* from Borrowers
+
+//--select* from Loans
+
+
+//--select* from Payments
+
+//--update Loans set Status = 'Completed' where id = 1
+
 //------------------------------------------------------
 //CREATE PROCEDURE sp_DailyCollection
-//        AS
+//AS
 //BEGIN
 
 //SELECT
@@ -257,10 +273,10 @@ namespace LoanTracker.Models
 //FROM Loans L
 
 //INNER JOIN Borrowers B
-//        ON B.Id = L.BorrowerId
+//ON B.Id = L.BorrowerId
 
 //LEFT JOIN Payments P
-//        ON P.LoanId = L.Id
+//ON P.LoanId = L.Id
 
 //WHERE L.Status='Active'
 
@@ -272,27 +288,39 @@ namespace LoanTracker.Models
 
 //END
 //---------------------------------------------------
-//CREATE PROCEDURE sp_AddPayment
-//        (
-//        @LoanId INT,
-//@Amount DECIMAL(18,2)
+//create PROCEDURE sp_AddPayment
+//(
+//    @LoanId INT,
+//    @Amount DECIMAL(18,2)
 //)
 //AS
 //BEGIN
+//    DECLARE @Totalloan DECIMAL(18,2);
+//        DECLARE @Totalpaid DECIMAL(18,2);
 
-//INSERT INTO Payments
-//(
-//LoanId,
-//AmountPaid
-//)
+//    -- Insert payment
+//    INSERT INTO Payments(LoanId, AmountPaid)
+//    VALUES(@LoanId, @Amount);
 
-//VALUES
-//(
-//@LoanId,
-//@Amount
-//)
+//    -- Get total loan amount
+//    SELECT @Totalloan = LoanAmount
+//    FROM Loans
+//    WHERE Id = @LoanId;
 
-//END
+//    -- Get total paid so far
+//    SELECT @Totalpaid = SUM(AmountPaid)
+//    FROM Payments
+//    WHERE LoanId = @LoanId;
+
+//    -- If fully paid, update loan status
+//    IF @Totalloan = @Totalpaid
+//    BEGIN
+//        UPDATE Loans
+//        SET Status = 'Completed'
+//        WHERE Id = @LoanId;
+//        END
+//    END;
+
 //-----------------------------------------------
 
 //CREATE PROCEDURE sp_GenerateReceiptNo
@@ -346,5 +374,6 @@ namespace LoanTracker.Models
 
 //END
 //--------------------------------------
+
     }
 }
