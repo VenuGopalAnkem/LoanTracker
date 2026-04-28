@@ -112,6 +112,9 @@ namespace LoanTracker.Controllers
         // DAILY COLLECTION
         public IActionResult Collection()
         {
+        //}
+
+
 
             DataTable data = service.GetDailyCollection();
 
