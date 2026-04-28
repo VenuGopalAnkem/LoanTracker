@@ -102,7 +102,7 @@ namespace LoanTracker.Models
 
 //    CreatedDate DATETIME DEFAULT GETDATE()
 //)
-//-------------------------------------------------
+//------------------------------------------------
 //CREATE PROCEDURE sp_AddBorrower
 //(
 //@FullName NVARCHAR(150),
